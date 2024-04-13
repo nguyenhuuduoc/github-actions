@@ -1,0 +1,28 @@
+name: Create Release Branch
+
+on:
+  workflow_dispatch:
+    inputs:
+      customer:
+        description: 'duocnh'
+        required: true
+      version:
+        description: 'v1.0'
+        required: true
+
+jobs:
+  create_branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Create Release Branch
+        run: |
+          git checkout master
+          git pull origin master
+          git checkout -b releases/$CUSTOMER-$VERSION
+          git push origin releases/$CUSTOMER-$VERSION
+        env:
+          CUSTOMER: ${{ github.event.inputs.customer }}
+          VERSION: ${{ github.event.inputs.version }}
