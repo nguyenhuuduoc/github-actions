@@ -15,10 +15,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Create Release Branch
-        uses: peterjgrainger/action-create-branch@v2.2.0
-        with:
-          branch: refs/heads/releases/$CUSTOMER-$VERSION
+        run: |
+          git checkout master
+          git pull origin master
+          git checkout -b releases/$CUSTOMER-$VERSION
+          git push origin releases/$CUSTOMER-$VERSION
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CUSTOMER: ${{ github.event.inputs.customer }}
           VERSION: ${{ github.event.inputs.version }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
