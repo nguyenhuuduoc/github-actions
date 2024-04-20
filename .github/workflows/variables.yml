@@ -40,5 +40,6 @@ jobs:
     steps:
       - name: Print
         run: |
-          KEY1="${{ needs.prepare.outputs.KEY1 }}"
           echo "Key is ${KEY1}"
+        env:
+          KEY1: ${{ needs.prepare.outputs.KEY1 }}
