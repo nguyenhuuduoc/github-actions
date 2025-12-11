@@ -1,15 +1,20 @@
 name: PR Source Test
 
 on:
-  pull_request:
-    branches:
-      - master
+#   pull_request:
+#     branches:
+#       - master
+  pull_request_review:
+    types: [submitted]
 
 jobs:
   analyze-sources:
+    # Running a workflow when a pull request is approved
+    if: github.event.review.state == 'approved'
     runs-on: ubuntu-latest
-    
     steps:
+      - run: echo "This PR was approved"
+    
       - name: Checkout code (PR branch)
         uses: actions/checkout@v4
           
