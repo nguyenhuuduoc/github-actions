@@ -22,6 +22,7 @@ jobs:
     steps:
       - name: Notify approval for master PR
         run: |
+          echo "PR Number: ${{ github.event.pull_request.number }}"
           echo "This PR was approved by ${{ github.event.review.user.login }}"
           echo "Target branch: ${{ github.event.pull_request.base.ref }}"
           echo "Source branch: ${{ github.event.pull_request.head.ref }}"
@@ -46,8 +47,3 @@ jobs:
             echo "Available Python files:"
             find . -type f -name "*.py" | head -20
           fi
-          
-          echo -e "\n## Repository information"
-          echo "PR Number: ${{ github.event.pull_request.number }}"
-          echo "Source branch: ${{ github.event.pull_request.head.ref }}"
-          echo "Target branch: ${{ github.event.pull_request.base.ref }}"
