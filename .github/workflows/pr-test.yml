@@ -3,7 +3,6 @@ name: PR Source Test
 on:
   pull_request_review:
     types: [submitted]
-  # If you want to run on pull_request events too, uncomment this:
   # pull_request:
   #   branches:
   #     - master
@@ -47,3 +46,4 @@ jobs:
             echo "Available Python files:"
             find . -type f -name "*.py" | head -20
           fi
+
