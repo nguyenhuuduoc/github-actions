@@ -1,3 +1,5 @@
+# .github/workflows/pr-source-test.yml on the 'feature-branch'
+
 name: PR Source Test
 on:
   pull_request:
@@ -17,6 +19,7 @@ jobs:
       - name: Detect sources
         id: detect
         run: |
+            echo "--- Workflow Version: FEATURE Branch ---"
             # List files to prove we have PR branch code
             echo "Files in runner:"
             ls -la
