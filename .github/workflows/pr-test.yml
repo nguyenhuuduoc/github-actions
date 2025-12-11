@@ -16,7 +16,6 @@ jobs:
       - name: Detect sources
         id: detect
         run: |
-            echo "--- Workflow Version: DEV Branch ---"
             # List files to prove we have PR branch code
             echo "Files in runner:"
             ls -la
