@@ -10,12 +10,13 @@ on:
 jobs:
   analyze-sources:
     # Running a workflow when a pull request is approved
-    if: github.event.review.state == 'approved'
+    if: |
+        github.event.review.state == 'approved' &&
+        github.event.pull_request.base.ref == 'master'
     runs-on: ubuntu-latest
     steps:
       - run: echo "This PR was approved"
     
-    steps:
       - name: Checkout code (PR branch)
         uses: actions/checkout@v4
           
