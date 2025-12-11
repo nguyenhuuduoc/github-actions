@@ -15,21 +15,17 @@ on:
   pull_request_review:
     types: [submitted]
 
-jobs:
-  analyze-sources:
-    # Run only when:
-    # 1. A PR review is submitted AND approved
-    # 2. The PR is targeting the master branch
-    if: |
-      github.event.review.state == 'approved' &&
-      github.event.pull_request.base.ref == 'master'
-    runs-on: ubuntu-latest
-
 permissions:
   contents: read
 
 jobs:
     CodeScan:
+        # Run only when:
+        # 1. A PR review is submitted AND approved
+        # 2. The PR is targeting the master branch
+        if: |
+          github.event.review.state == 'approved' &&
+          github.event.pull_request.base.ref == 'master'
         permissions:
           contents: read # for actions/checkout to fetch code
           security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
