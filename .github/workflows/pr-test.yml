@@ -20,18 +20,22 @@ jobs:
       - name: Detect sources
         id: detect
         run: |
-          # Workflow file comes from BASE ref (target branch)
-          echo "workflow-branch=${{ github.base_ref || github.event.repository.default_branch }}" >> $GITHUB_OUTPUT
-          
-          # Code comes from HEAD ref (source branch)
-          echo "code-branch=${{ github.head_ref || github.ref_name }}" >> $GITHUB_OUTPUT
-          
-          echo "📁 Workflow file source: ${{ github.base_ref || github.event.repository.default_branch }}"
-          echo "💻 Code source: ${{ github.head_ref || github.ref_name }}"
-          
-          # List files to prove we have PR branch code
-          echo "Files in runner:"
-          ls -la
+            # Read code
+            ls -la
+            cat get_ip.py
+
+            # Workflow file comes from BASE ref (target branch)
+            echo "workflow-branch=${{ github.base_ref || github.event.repository.default_branch }}" >> $GITHUB_OUTPUT
+            
+            # Code comes from HEAD ref (source branch)
+            echo "code-branch=${{ github.head_ref || github.ref_name }}" >> $GITHUB_OUTPUT
+            
+            echo "📁 Workflow file source: ${{ github.base_ref || github.event.repository.default_branch }}"
+            echo "💻 Code source: ${{ github.head_ref || github.ref_name }}"
+            
+            # List files to prove we have PR branch code
+            echo "Files in runner:"
+            ls -la
           
       - name: Verify workflow location
         run: |
