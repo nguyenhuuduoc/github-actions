@@ -27,8 +27,6 @@ jobs:
 
       - name: Checkout code (PR branch)
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Detect sources
         id: detect
