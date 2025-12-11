@@ -1,28 +1,53 @@
 name: PR Source Test
 
 on:
-#   pull_request:
-#     branches:
-#       - master
   pull_request_review:
     types: [submitted]
+  # If you want to run on pull_request events too, uncomment this:
+  # pull_request:
+  #   branches:
+  #     - master
 
 jobs:
   analyze-sources:
-    # Running a workflow when a pull request is approved
-    if: github.event.review.state == 'approved'
+    # Run only when:
+    # 1. A PR review is submitted AND approved
+    # 2. The PR is targeting the master branch
+    if: |
+      github.event.review.state == 'approved' &&
+      github.event.pull_request.base.ref == 'master'
+    
     runs-on: ubuntu-latest
+    
     steps:
-      - run: echo "This PR was approved"
+      - name: Notify approval for master PR
+        run: |
+          echo "This PR was approved by ${{ github.event.review.user.login }}"
+          echo "Target branch: ${{ github.event.pull_request.base.ref }}"
+          echo "Source branch: ${{ github.event.pull_request.head.ref }}"
     
       - name: Checkout code (PR branch)
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
           
       - name: Detect sources
         id: detect
         run: |
-            # List files
-            ls -la
-
-            # Read code
+          echo "## List all files in repository"
+          ls -la
+          
+          echo -e "\n## Check if get_ip.py exists"
+          if [ -f "get_ip.py" ]; then
+            echo "Reading get_ip.py:"
             cat get_ip.py
+          else
+            echo "File get_ip.py not found"
+            echo "Available Python files:"
+            find . -type f -name "*.py" | head -20
+          fi
+          
+          echo -e "\n## Repository information"
+          echo "PR Number: ${{ github.event.pull_request.number }}"
+          echo "Source branch: ${{ github.event.pull_request.head.ref }}"
+          echo "Target branch: ${{ github.event.pull_request.base.ref }}"
