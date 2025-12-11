@@ -22,7 +22,7 @@ jobs:
         run: |
             # Read code
             ls -la
-            cat get-ip.py
+            cat get_ip.py
 
             # Workflow file comes from BASE ref (target branch)
             echo "workflow-branch=${{ github.base_ref || github.event.repository.default_branch }}" >> $GITHUB_OUTPUT
