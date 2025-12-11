@@ -12,7 +12,7 @@ jobs:
     # Running a workflow when a pull request is approved
     if: |
         github.event.review.state == 'approved' &&
-        github.event.pull_request.base.ref == 'master'
+        github.event.pull_request.base.ref == 'dev'
     runs-on: ubuntu-latest
     steps:
       - run: echo "This PR was approved"
