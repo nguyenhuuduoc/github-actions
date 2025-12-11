@@ -10,9 +10,7 @@ on:
 jobs:
   analyze-sources:
     # Running a workflow when a pull request is approved
-    if: |
-        github.event.review.state == 'approved' &&
-        github.event.pull_request.base.ref == 'dev'
+    if: github.event.review.state == 'approved'
     runs-on: ubuntu-latest
     steps:
       - run: echo "This PR was approved"
