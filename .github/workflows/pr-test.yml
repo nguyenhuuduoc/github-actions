@@ -16,7 +16,7 @@ jobs:
       github.event.review.state == 'approved' &&
       github.event.pull_request.base.ref == 'master'
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Notify approval for master PR
         run: |
@@ -24,12 +24,12 @@ jobs:
           echo "This PR was approved by ${{ github.event.review.user.login }}"
           echo "Target branch: ${{ github.event.pull_request.base.ref }}"
           echo "Source branch: ${{ github.event.pull_request.head.ref }}"
-    
+
       - name: Checkout code (PR branch)
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          
+
       - name: Detect sources
         id: detect
         run: |
@@ -45,6 +45,3 @@ jobs:
             echo "Available Python files:"
             find . -type f -name "*.py" | head -20
           fi
-
-
-
