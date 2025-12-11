@@ -7,9 +7,6 @@ on:
 jobs:
   analyze-sources:
     runs-on: ubuntu-latest
-    outputs:
-      workflow-branch: ${{ steps.detect.outputs.workflow-branch }}
-      code-branch: ${{ steps.detect.outputs.code-branch }}
     
     steps:
       - name: Checkout code (PR branch)
@@ -26,17 +23,3 @@ jobs:
 
             # Read code
             cat get_ip.py
-
-            # Workflow file comes from BASE ref (target branch)
-            echo "workflow-branch=${{ github.base_ref || github.event.repository.default_branch }}" >> $GITHUB_OUTPUT
-            
-            # Code comes from HEAD ref (source branch)
-            echo "code-branch=${{ github.head_ref || github.ref_name }}" >> $GITHUB_OUTPUT
-            
-            echo "📁 Workflow file source: ${{ github.base_ref || github.event.repository.default_branch }}"
-            echo "💻 Code source: ${{ github.head_ref || github.ref_name }}"
-   
-      - name: Verify workflow location
-        run: |
-          echo "This workflow file is from: .github/workflows/pr-test.yml"
-          echo "If you see this, it came from the TARGET branch's workflow directory"
