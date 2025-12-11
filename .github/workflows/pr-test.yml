@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Notify approval for master PR
+      - name: Show PR information
         run: |
           echo "PR Number: ${{ github.event.pull_request.number }}"
           echo "This PR was approved by ${{ github.event.review.user.login }}"
