@@ -15,7 +15,6 @@ jobs:
     if: |
       github.event.review.state == 'approved' &&
       github.event.pull_request.base.ref == 'master'
-    
     runs-on: ubuntu-latest
     
     steps:
@@ -46,5 +45,6 @@ jobs:
             echo "Available Python files:"
             find . -type f -name "*.py" | head -20
           fi
+
 
 
