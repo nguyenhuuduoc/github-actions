@@ -14,13 +14,11 @@ jobs:
     steps:
       - name: Checkout code (PR branch)
         uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
           
       - name: Detect sources
         id: detect
         run: |
-            echo "--- Workflow Version: FEATURE Branch ---"
+            echo "--- Workflow Version: DEV Branch ---"
             # List files to prove we have PR branch code
             echo "Files in runner:"
             ls -la
