@@ -16,8 +16,7 @@ jobs:
       - name: Detect sources
         id: detect
         run: |
-            # List files to prove we have PR branch code
-            echo "Files in runner:"
+            # List files
             ls -la
 
             # Read code
